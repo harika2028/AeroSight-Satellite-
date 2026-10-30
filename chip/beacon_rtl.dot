@@ -1,0 +1,57 @@
+digraph "beacon" {
+label="beacon";
+rankdir="LR";
+remincross=true;
+n6 [ shape=octagon, label="beacon_tx", color="black", fontcolor="black" ];
+n7 [ shape=octagon, label="clk", color="black", fontcolor="black" ];
+n8 [ shape=octagon, label="packet_count", color="black", fontcolor="black" ];
+n9 [ shape=octagon, label="rst", color="black", fontcolor="black" ];
+n10 [ shape=diamond, label="timer", color="black", fontcolor="black" ];
+{ rank="source"; n7; n9;}
+{ rank="sink"; n6; n8;}
+v0 [ label="1" ];
+c14 [ shape=record, label="{{<p11> A|<p12> B}|$3\n$add|{<p13> Y}}",  ];
+v1 [ label="1" ];
+c15 [ shape=record, label="{{<p11> A|<p12> B}|$4\n$add|{<p13> Y}}",  ];
+c20 [ shape=record, label="{{<p16> CLK|<p17> D|<p18> SRST}|$26\n$sdff|{<p19> Q}}",  ];
+c22 [ shape=record, label="{{<p16> CLK|<p17> D|<p21> EN|<p18> SRST}|$28\n$sdffe|{<p19> Q}}",  ];
+x2 [ shape=record, style=rounded, label="<s0> 7:0 - 7:0 ", color="black", fontcolor="black" ];
+x2:e -> c22:p17:w [arrowhead=odiamond, arrowtail=odiamond, dir=both, color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+c23 [ shape=record, label="{{<p16> CLK|<p17> D|<p18> SRST}|$29\n$sdff|{<p19> Q}}",  ];
+x3 [ shape=record, style=rounded, label="<s0> 15:0 - 15:0 ", color="black", fontcolor="black" ];
+x3:e -> c23:p17:w [arrowhead=odiamond, arrowtail=odiamond, dir=both, color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+c24 [ shape=record, label="{{<p11> A}|$31\n$reduce_or|{<p13> Y}}",  ];
+x4 [ shape=record, style=rounded, label="<s1> 0:0 - 1:1 |<s0> 0:0 - 0:0 ", color="black", fontcolor="black" ];
+x4:e -> c24:p11:w [arrowhead=odiamond, arrowtail=odiamond, dir=both, color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+v5 [ label="16'0000000000000111" ];
+c25 [ shape=record, label="{{<p11> A|<p12> B}|$2\n$eq|{<p13> Y}}",  ];
+v6 [ label="1'0" ];
+v7 [ label="1'1" ];
+c27 [ shape=record, label="{{<p11> A|<p12> B|<p26> S}|$6\n$mux|{<p13> Y}}",  ];
+c14:p13:e -> x2:s0:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+c23:p19:e -> n10:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+n10:e -> c15:p11:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+n10:e -> c25:p11:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+c15:p13:e -> x3:s0:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+c24:p13:e -> c23:p18:w [color="black", fontcolor="black", label=""];
+n4 [ shape=point ];
+c25:p13:e -> n4:w [color="black", fontcolor="black", label=""];
+n4:e -> c22:p21:w [color="black", fontcolor="black", label=""];
+n4:e -> c27:p26:w [color="black", fontcolor="black", label=""];
+n4:e -> x4:s1:w [color="black", fontcolor="black", label=""];
+c27:p13:e -> c20:p17:w [color="black", fontcolor="black", label=""];
+c20:p19:e -> n6:w [color="black", fontcolor="black", label=""];
+n7:e -> c20:p16:w [color="black", fontcolor="black", label=""];
+n7:e -> c22:p16:w [color="black", fontcolor="black", label=""];
+n7:e -> c23:p16:w [color="black", fontcolor="black", label=""];
+c22:p19:e -> n8:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+n8:e -> c14:p11:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+n9:e -> c20:p18:w [color="black", fontcolor="black", label=""];
+n9:e -> c22:p18:w [color="black", fontcolor="black", label=""];
+n9:e -> x4:s0:w [color="black", fontcolor="black", label=""];
+v0:e -> c14:p12:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+v1:e -> c15:p12:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+v5:e -> c25:p12:w [color="black", fontcolor="black", style="setlinewidth(3)", label=""];
+v6:e -> c27:p11:w [color="black", fontcolor="black", label=""];
+v7:e -> c27:p12:w [color="black", fontcolor="black", label=""];
+}
